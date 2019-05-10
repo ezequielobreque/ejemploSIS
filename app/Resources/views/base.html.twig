@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+    {% if app.user %}
+
+        <a href="{{ path('fos_user_security_logout')}}"> logout </a>
+        <br>
+
+        <a href="{{ path('fos_user_profile_show') }}"> profile </a>
+        <br>
+        <a href="{{ path('fos_user_change_password') }}"> change password </a>
+        <br>
+
+        {% for User.  %}
+
+            <li>{{ 1 }}</li>
+        {% endfor %}
+        {% else %}
+
+            <a href="{{ path('fos_user_registration_register') }}"> registrar </a>
+            <br>
+            <a href="{{ path('fos_user_resetting_request')}}"> recuperar contrasenia </a>
+            <br>
+            <a href="{{ path('fos_user_security_login')}}"> login </a>
+            <br>
+        {% endif %}
+
+
+
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
