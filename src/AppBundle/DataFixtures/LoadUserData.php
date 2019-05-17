@@ -47,7 +47,7 @@ class LoadUserData Extends AbstractFixture implements OrderedFixtureInterface
         $SantiagoA =new User();
         $SantiagoA ->setUsername('Santiago');
         $SantiagoA ->setPassword('test');
-        $SantiagoA ->setEmail('abril@gmail.com');
+        $SantiagoA ->setEmail('santiago@gmail.com');
         $manager->persist($SantiagoA);
 
 

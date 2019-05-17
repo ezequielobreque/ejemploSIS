@@ -50,10 +50,26 @@ class Mensaje
     {
         $this->informacion = $informacion;
         $this->FechaHora= new \DateTime();
+        $this->meGusta=(new MeGusta($this));
     }
     public function setUser(User $user){
         $this->user= $user;
 
     }
+
+    /**
+     * @return mixed
+     */
+    public function getMeGusta()
+    {
+        return $this->meGusta;
+    }
+    public function setLike(User $usuario)
+    {
+        $this->meGusta->setLike($usuario);
+
+    }
+
+
 
 }

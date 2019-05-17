@@ -22,7 +22,7 @@ class LoadMeGustaData Extends AbstractFixture implements OrderedFixtureInterface
         $AbrilM = $this->getReference('AbrilM');
         $SantiagoA = $this->getReference('SantiagoA');
         $EzequielO = $this->getReference('EzequielO');
-        $mensaje1 = $EzequielO->getMenssajes(0);
+        $mensaje1 = $EzequielO->getMensaje(0);
         $FacuT->DarMeGusta($mensaje1);
         $AbrilM->DarMeGusta($mensaje1);
         $SantiagoA->DarMeGusta($mensaje1);

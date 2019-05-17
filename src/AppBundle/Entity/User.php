@@ -104,7 +104,9 @@ class User extends BaseUser
     {
         return $this->mensajes;
     }
-
+    /**
+     * @return Mensaje
+     */
     public function getMensaje(int $int)
     {
         return $this->mensajes[$int];
@@ -112,12 +114,13 @@ class User extends BaseUser
 
 
     public function  DarMeGusta(Mensaje $mensaje){
-        $megusta=$mensaje->getMeGusta();
-        $this->meGusta[]=$megusta;
-        $megusta->setLike($this);
+
+        $this->meGusta[]=$mensaje->getMeGusta();
+        $mensaje->setLike($this);
         return $this;
 
 
     }
+
 
 }

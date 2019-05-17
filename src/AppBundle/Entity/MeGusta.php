@@ -36,16 +36,48 @@ class MeGusta
      */
     protected $mensaje;
 
+
+
     //protected $count;
-    public function _construct()
+    public function _construct(Mensaje $men)
     {
-        parent::_construct();
+        //parent::_construct();
         $this->user =new ArrayCollection();
+        $this->mensaje=$men;
         }
 
-    public function setLike(User $usuario){
+
+    
+    public function setLike(User $usuario)
+    {
         $this->user[]= $usuario;
 
     }
+
+    /**
+     * @return mixed
+     */
+    public function getMensaje()
+    {
+        return $this->mensaje;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
 
 }
