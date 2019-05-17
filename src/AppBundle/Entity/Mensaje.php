@@ -7,6 +7,7 @@
  */
 
 namespace AppBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 /**
  *
@@ -40,17 +41,16 @@ class Mensaje
     protected $FechaHora;
 
     /**
-     * One Mensaje has One MeGusta.
-     * @ORM\OneToOne(targetEntity="MeGusta",cascade={"persist"},mappedBy="mensaje")
+     * @ORM\ManyToMany(targetEntity="User",inversedBy="meGustas")
      */
-    protected $meGusta;
+    protected $meGustas;
 
 
     public function __construct($informacion)
     {
         $this->informacion = $informacion;
         $this->FechaHora= new \DateTime();
-        $this->meGusta=(new MeGusta($this));
+        $this->meGustas= new ArrayCollection();
     }
     public function setUser(User $user){
         $this->user= $user;
@@ -64,11 +64,12 @@ class Mensaje
     {
         return $this->meGusta;
     }
-    public function setLike(User $usuario)
-    {
-        $this->meGusta->setLike($usuario);
+
+    public function addMeGusta(User $user){
+        $this->meGustas[]= $user;
 
     }
+
 
 
 

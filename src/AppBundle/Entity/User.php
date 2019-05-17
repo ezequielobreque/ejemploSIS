@@ -26,10 +26,9 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * Many Users have Many Groups.
-     * @ORM\ManyToMany(targetEntity="MeGusta", inversedBy="user")
+     * @ORM\ManyToMany(targetEntity="Mensaje",mappedBy="MeGustas")
      */
-    protected $meGusta;
+    protected $meGustas;
     /**
      * @ORM\OneToMany(targetEntity="Mensaje",cascade={"persist"},mappedBy="user")
      */
@@ -72,7 +71,7 @@ class User extends BaseUser
     {
         parent::_construct();
         $this->mensajes =new ArrayCollection();
-        $this->meGusta =new ArrayCollection();
+        $this->meGustas =new ArrayCollection();
         $this->losQueSigo = new ArrayCollection();
         $this->misSeguidores = new ArrayCollection();
     }
@@ -113,14 +112,13 @@ class User extends BaseUser
     }
 
 
-    public function  DarMeGusta(Mensaje $mensaje){
 
-        $this->meGusta[]=$mensaje->getMeGusta();
-        $mensaje->setLike($this);
+    public function  DarMeGusta(Mensaje $mensaje){
+        $this->meGustas[] = $mensaje;
+        $mensaje->addMeGusta($this);
         return $this;
 
 
     }
-
 
 }
