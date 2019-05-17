@@ -39,6 +39,13 @@ class Mensaje
      */
     protected $FechaHora;
 
+    /**
+     * One Mensaje has One MeGusta.
+     * @ORM\OneToOne(targetEntity="MeGusta",cascade={"persist"},mappedBy="mensaje")
+     */
+    protected $meGusta;
+
+
     public function __construct($informacion)
     {
         $this->informacion = $informacion;

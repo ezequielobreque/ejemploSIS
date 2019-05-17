@@ -26,9 +26,27 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * Many Users have Many Groups.
+     * @ORM\ManyToMany(targetEntity="MeGusta", inversedBy="user")
+     */
+    protected $meGusta;
+    /**
      * @ORM\OneToMany(targetEntity="Mensaje",cascade={"persist"},mappedBy="user")
      */
     protected $mensajes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="losQueSigo")
+     */
+    protected $misSeguidores;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="misSeguidores")
+     */
+    protected $losQueSigo;
+
+
+
 
     /**
      * @return string
@@ -54,6 +72,9 @@ class User extends BaseUser
     {
         parent::_construct();
         $this->mensajes =new ArrayCollection();
+        $this->meGusta =new ArrayCollection();
+        $this->losQueSigo = new ArrayCollection();
+        $this->misSeguidores = new ArrayCollection();
     }
 
     public function addMensaje(Mensaje $mensaje){
@@ -63,6 +84,18 @@ class User extends BaseUser
 
 
     }
+    public function addSeguir(User $usuario){
+        $this->LosQueSigo[] = $usuario;
+        $usuario->setSeguidor($this);
+        return $this;
+
+
+    }
+    public function setSeguidor(User $usuario){
+        $this->misSeguidores[]= $usuario;
+
+    }
+
 
     /**
      * @return mixed
@@ -72,5 +105,19 @@ class User extends BaseUser
         return $this->mensajes;
     }
 
+    public function getMensaje(int $int)
+    {
+        return $this->mensajes[$int];
+    }
+
+
+    public function  DarMeGusta(Mensaje $mensaje){
+        $megusta=$mensaje->getMeGusta();
+        $this->meGusta[]=$megusta;
+        $megusta->setLike($this);
+        return $this;
+
+
+    }
 
 }

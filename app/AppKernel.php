@@ -20,10 +20,18 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
         ];
 
+        if(in_array($this->getEnvironment(),array('dev','test'))){
+            $bundles[] =new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
+
+
+        }
+
+
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
+
 
             if ('dev' === $this->getEnvironment()) {
                 $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();

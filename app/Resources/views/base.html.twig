@@ -17,9 +17,9 @@
         <a href="{{ path('fos_user_change_password') }}"> change password </a>
         <br>
 
-        {% for User.  %}
+        {% for i in app.User  %}
 
-            <li>{{ 1 }}</li>
+            <li>{{ i.getId() }}</li>
         {% endfor %}
         {% else %}
 
