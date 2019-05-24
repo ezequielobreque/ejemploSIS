@@ -31,6 +31,7 @@ class User extends BaseUser
     protected $meGustas;
     /**
      * @ORM\OneToMany(targetEntity="Mensaje",cascade={"persist"},mappedBy="user")
+     * @ORM\OrderBy({"FechaHora" = "DESC"})
      */
     protected $mensajes;
 

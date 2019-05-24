@@ -70,6 +70,22 @@ class Mensaje
 
     }
 
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInformacion()
+    {
+        return $this->informacion;
+    }
+
 
 
 

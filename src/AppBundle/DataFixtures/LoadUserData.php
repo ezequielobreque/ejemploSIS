@@ -21,6 +21,8 @@ class LoadUserData Extends AbstractFixture implements OrderedFixtureInterface
         $EzequielO ->setUsername('Ezequiel');
         $EzequielO ->setPassword('test');
         $EzequielO ->setEmail('ezequiel@gmail.com');
+        $EzequielO ->setRoles(array('ROLE_ADMIN'));
+        $EzequielO ->setEnabled(1);
         $manager->persist($EzequielO);
 
 
@@ -30,6 +32,8 @@ class LoadUserData Extends AbstractFixture implements OrderedFixtureInterface
         $FacuT ->setUsername('Facu');
         $FacuT ->setPassword('test');
         $FacuT ->setEmail('facu@gmail.com');
+        $FacuT ->setRoles(array('ROLE_ADMIN'));
+        $FacuT ->setEnabled(1);
         $manager->persist($FacuT);
 
 
@@ -39,6 +43,8 @@ class LoadUserData Extends AbstractFixture implements OrderedFixtureInterface
         $AbrilM ->setUsername('Abril');
         $AbrilM ->setPassword('test');
         $AbrilM ->setEmail('abril@gmail.com');
+        $AbrilM ->setRoles(array('ROLE_ADMIN'));
+        $AbrilM ->setEnabled(1);
         $manager->persist($AbrilM);
 
 
@@ -48,6 +54,8 @@ class LoadUserData Extends AbstractFixture implements OrderedFixtureInterface
         $SantiagoA ->setUsername('Santiago');
         $SantiagoA ->setPassword('test');
         $SantiagoA ->setEmail('santiago@gmail.com');
+        $SantiagoA ->setRoles(array('ROLE_ADMIN'));
+        $SantiagoA ->setEnabled(1);
         $manager->persist($SantiagoA);
 
 
