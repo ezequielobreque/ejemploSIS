@@ -31,7 +31,7 @@ class User extends BaseUser
     protected $meGustas;
     /**
      * @ORM\OneToMany(targetEntity="Mensaje",cascade={"persist"},mappedBy="user")
-     * @ORM\OrderBy({"FechaHora" = "DESC"})
+     * @ORM\OrderBy({"fechaHora" = "DESC"})
      */
     protected $mensajes;
 
@@ -96,6 +96,14 @@ class User extends BaseUser
 
     }
 
+    /**
+     * @return mixed
+     */
+    public function getLosQueSigo()
+    {
+        return $this->losQueSigo;
+    }
+
 
     /**
      * @return mixed
@@ -121,5 +129,30 @@ class User extends BaseUser
 
 
     }
+
+    /**
+     * @return mixed
+     */
+    public function getMisSeguidores()
+    {
+        return $this->misSeguidores;
+    }
+
+    /**
+     * @param mixed $meGustas
+     */
+    public function setMeGustas($meGustas)
+    {
+        $this->meGustas = $meGustas;
+    }
+
+    /**
+     * @param mixed $losQueSigo
+     */
+    public function setLosQueSigo($losQueSigo)
+    {
+        $this->losQueSigo = $losQueSigo;
+    }
+
 
 }

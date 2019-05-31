@@ -1,39 +1,110 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-    {% if app.user %}
-
-        <a href="{{ path('fos_user_security_logout')}}"> logout </a>
-        <br>
-
-        <a href="{{ path('fos_user_profile_show') }}"> profile </a>
-        <br>
-        <a href="{{ path('fos_user_change_password') }}"> change password </a>
-        <br>
-
-        {% for i in app.User  %}
-
-            <li>{{ i.getId() }}</li>
-        {% endfor %}
-        {% else %}
-
-            <a href="{{ path('fos_user_registration_register') }}"> registrar </a>
-            <br>
-            <a href="{{ path('fos_user_resetting_request')}}"> recuperar contrasenia </a>
-            <br>
-            <a href="{{ path('fos_user_security_login')}}"> login </a>
-            <br>
-        {% endif %}
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Sticky Footer Navbar Template · Bootstrap</title>
 
 
+    <!-- Bootstrap core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}"/>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sticky-footer-navbar/">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
 
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('css/sticky-footer-navbar.css') }}" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100">
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+
+            <a class="navbar-brand" href="/ejemploSIS/web/app_dev.php">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+
+        {% if app.user %}
+
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('fos_user_security_logout')}}">LogOut <span class="sr-only">(current)</span></a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('fos_user_profile_show') }}">Mi Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('fos_user_change_password') }}" >Cambiar Contrasenia</a>
+                </li>
+            </ul>
+
+            {% else %}
+
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('fos_user_registration_register') }}">registrarse <span class="sr-only">(current)</span></a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('fos_user_security_login')}}">Iniciar sesion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="{{ path('fos_user_resetting_request')}}" tabindex="-1" aria-disabled="true">Recuperar contrasenia</a>
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+
+            <form class="form-inline mt-2 mt-md-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+</header>
+{% for i in app.User  %}
+
+    <li>{{ i.getId() }}</li>
+{% endfor %}
+
+
+
+
+
+{% block body %}{% endblock %}
+{% block javascripts %}{% endblock %}
+
+<footer class="footer mt-auto py-3">
+    <div class="container">
+        <span class="text-muted">Taller de nuevas tecnologias : Sistemas 2019</span>
+    </div>
+</footer>
+
+</body>
 </html>
+

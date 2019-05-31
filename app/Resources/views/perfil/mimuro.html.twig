@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/perfil.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css">
+    <div class="wrapper">
+        <div class="flexContainer">
+            <div class="firstCol">
+
+
+                <img src="https://image.flaticon.com/icons/svg/72/72905.svg" style="max-width: 100px;max-height: 100px;border: 1px solid">
+                <p>eze</p>
+
+            </div>
+            <div class="secondCol">
+                <div class="innerFlex">
+                    <div class="firstItem">
+
+
+                        <i class="fas fa-user"></i>
+                        <form action="{{ path('CMensaje') }}" method="post" name="formulario_login">
+                                <input class="redondeado" type="text" id="postear" name="_postear" placeholder="¿en que estas pensando?">
+
+
+                        <input type="submit" type="button" class="btn btn-primary"  value="postear">
+
+                        </form>
+
+
+                    </div>
+
+
+
+
+    {% for mensaje in perfil|reverse%}
+                    <div class="firstItem">
+    <i>{{ mensaje.getUser().getUsername() }}</i>
+    <br>
+    <p>{{ mensaje.getInformacion() }}</p>
+                    </div>
+    {% endfor %}
+
+
+
+    </div>
+            </div>
+    <div class="thirdCol">
+        <p>nose</p>
+    </div>
+    </div>
+    </div>
+
+    {% block javascripts %}
+    {% endblock %}
+
+{% endblock %}

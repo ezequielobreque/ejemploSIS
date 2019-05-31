@@ -19,7 +19,9 @@ class LoadUserData Extends AbstractFixture implements OrderedFixtureInterface
     {
         $EzequielO =new User();
         $EzequielO ->setUsername('Ezequiel');
-        $EzequielO ->setPassword('test');
+        $password='test';
+        $EzequielO->setPlainPassword($password);
+
         $EzequielO ->setEmail('ezequiel@gmail.com');
         $EzequielO ->setRoles(array('ROLE_ADMIN'));
         $EzequielO ->setEnabled(1);
@@ -30,7 +32,7 @@ class LoadUserData Extends AbstractFixture implements OrderedFixtureInterface
 
         $FacuT =new User();
         $FacuT ->setUsername('Facu');
-        $FacuT ->setPassword('test');
+        $FacuT ->setPlainPassword($password);
         $FacuT ->setEmail('facu@gmail.com');
         $FacuT ->setRoles(array('ROLE_ADMIN'));
         $FacuT ->setEnabled(1);
@@ -41,7 +43,7 @@ class LoadUserData Extends AbstractFixture implements OrderedFixtureInterface
 
         $AbrilM =new User();
         $AbrilM ->setUsername('Abril');
-        $AbrilM ->setPassword('test');
+        $AbrilM ->setPlainPassword($password);
         $AbrilM ->setEmail('abril@gmail.com');
         $AbrilM ->setRoles(array('ROLE_ADMIN'));
         $AbrilM ->setEnabled(1);
@@ -52,7 +54,7 @@ class LoadUserData Extends AbstractFixture implements OrderedFixtureInterface
 
         $SantiagoA =new User();
         $SantiagoA ->setUsername('Santiago');
-        $SantiagoA ->setPassword('test');
+        $SantiagoA ->setPlainPassword($password);
         $SantiagoA ->setEmail('santiago@gmail.com');
         $SantiagoA ->setRoles(array('ROLE_ADMIN'));
         $SantiagoA ->setEnabled(1);

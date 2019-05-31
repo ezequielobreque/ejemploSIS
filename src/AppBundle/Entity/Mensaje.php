@@ -38,7 +38,7 @@ class Mensaje
     /**
      * @ORM\Column(type="datetime")
      */
-    protected $FechaHora;
+    protected $fechaHora;
 
     /**
      * @ORM\ManyToMany(targetEntity="User",inversedBy="meGustas")
@@ -49,12 +49,20 @@ class Mensaje
     public function __construct($informacion)
     {
         $this->informacion = $informacion;
-        $this->FechaHora= new \DateTime();
+        $this->fechaHora= new \DateTime();
         $this->meGustas= new ArrayCollection();
     }
     public function setUser(User $user){
         $this->user= $user;
 
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFechaHora()
+    {
+        return $this->fechaHora;
     }
 
     /**
@@ -84,6 +92,46 @@ class Mensaje
     public function getInformacion()
     {
         return $this->informacion;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param mixed $informacion
+     */
+    public function setInformacion($informacion)
+    {
+        $this->informacion = $informacion;
+    }
+
+    /**
+     * @param mixed $fechaHora
+     */
+    public function setFechaHora($fechaHora)
+    {
+        $this->fechaHora = $fechaHora;
+    }
+
+    /**
+     * @param mixed $meGustas
+     */
+    public function setMeGustas($meGustas)
+    {
+        $this->meGustas = $meGustas;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 
 

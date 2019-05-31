@@ -36,6 +36,11 @@ class LoadSeguidoresData Extends AbstractFixture implements OrderedFixtureInterf
         $EzequielO->addSeguir($SantiagoA)
                 ->addSeguir($AbrilM)
                 ->addSeguir($FacuT);
+        $FacuT->addSeguir($EzequielO)
+               ->addSeguir($AbrilM);
+        $SantiagoA->addSeguir($FacuT);
+
+
 
         $manager->persist($EzequielO,$AbrilM,$FacuT,$SantiagoA);
         $manager->flush();

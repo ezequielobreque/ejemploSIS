@@ -33,6 +33,25 @@ class LoadMensajeData Extends AbstractFixture implements OrderedFixtureInterface
             ->addMensaje(new Mensaje("mi tercer mensaje"));
 
         $manager->persist($userAdmin);
+        $FacuT1 = $this->getReference('FacuT');
+        $FacuT1->addMensaje(new Mensaje("mi mensaje Facu 1"))
+            ->addMensaje(new Mensaje("mi Mensaje facu 2"))
+            ->addMensaje(new Mensaje("mi Mensaje facu 3"));
+
+        $manager->persist($FacuT1);
+
+        $AbrilM1 = $this->getReference('AbrilM');
+        $AbrilM1->addMensaje(new Mensaje("mi mensaje Abril 1"))
+            ->addMensaje(new Mensaje("mi Mensaje Abril 2"))
+            ->addMensaje(new Mensaje("mi Mensaje Abril 3"));
+
+        $manager->persist($AbrilM1);
+        $SantiagoA = $this->getReference('SantiagoA');
+        $SantiagoA->addMensaje(new Mensaje("mi mensaje Santiago 1"))
+            ->addMensaje(new Mensaje("mi Mensaje Santiago 2"))
+            ->addMensaje(new Mensaje("mi Mensaje Santiago 3"));
+
+        $manager->persist($SantiagoA);
         $manager->flush();
     }
     public function getOrder()
