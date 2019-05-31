@@ -16,7 +16,7 @@ use Doctrine\ORM;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
-class miMuroController extends controller
+class MiMuroController extends controller
 {
     /**
      * @Route("/mimuro", name="miPerfil")
@@ -48,10 +48,13 @@ class miMuroController extends controller
             ->from('AppBundle:Mensaje', 'm')
             ->join('m.user', 'u')
             ->where('u.id IN(:ids)')
-            ->orderBy('m.fechaHora', 'DESC')
+            ->orderBy('m.fechaHora','DESC')
             ->setParameter('ids', $followsId);
+        $qb->setFirstResult(0)
+            ->setMaxResults(5);
         $query = $qb->getQuery(); //->execute();
         $user =$query->getResult();
+
 
         //$usuario= $usuario->getResult();
         //   if($usuario !== null){
