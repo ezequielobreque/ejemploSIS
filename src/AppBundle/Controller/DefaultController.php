@@ -53,55 +53,7 @@ class DefaultController extends Controller
 
 
     }
-    /**
-     * @Route("/mimuro", name="miPerfil")
-     */
 
-
-
-
-
-    public function getAlgo()
-    {
-       // $em= $this->getDoctrine()->getManager();
-        //$usuario = $em->createQuery("SELECT u FROM AppBundle\Entity\User u  WHERE u.seguidos ='Ezequiel'");
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $expr = $entityManager->getExpressionBuilder();
-
-        $followsId = $entityManager->createQueryBuilder()
-            ->select('seg.id')
-            ->from('AppBundle:User', 'u')
-            ->join('u.losQueSigo', 'seg')
-            ->where('u.id = ?1')
-            ->getQuery()
-            ->setParameter(1, $this->getUser()->getId())
-            ->execute();
-
-        $qb = $entityManager->createQueryBuilder()
-            ->select('m')
-            ->from('AppBundle:Mensaje', 'm')
-            ->join('m.user', 'u')
-            ->where('u.id IN(:ids)')
-            ->orderBy('m.fechaHora', 'DESC')
-            ->setParameter('ids', $followsId);
-        $query = $qb->getQuery(); //->execute();
-        $user =$query->getResult();
-
-        //$usuario= $usuario->getResult();
-     //   if($usuario !== null){
-     //       $user=$usuario[0]    ;
-
-       // }
-
-
-
-
-        return $this ->render('perfil/mimuro.html.twig',['perfil'=>$user]);
-
-
-
-    }
 
 
 
