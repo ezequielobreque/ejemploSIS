@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+
+
+
+{% block body %}
+<div class="fos_user_user_show">
+
+
+
+    <div class="wrapper">
+        <div class="flexContainer">
+            <div class="firstCol">
+
+
+                <img src="https://image.flaticon.com/icons/svg/72/72905.svg" style="max-width: 100px;max-height: 100px;border: 1px solid">
+                <i>eze</i>
+                <br>
+                <i>Email :{{ app.user.email }}</i>
+
+            </div>
+            <div class="secondCol">
+                <div class="innerFlex">
+
+                    {% for mensaje in perfil%}
+
+                    <div class="firstItem">
+                        <i>{{ app.user.username }}</i>
+                        <br>
+                        <p>{{ mensaje.getInformacion() }}</p>
+                    </div>
+
+
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="thirdCol">
+                <p>nose</p>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}

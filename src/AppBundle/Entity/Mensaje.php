@@ -73,6 +73,15 @@ class Mensaje
         return $this->meGusta;
     }
 
+    public function getMeGustas()
+    {
+
+
+
+
+        return sizeof($this->meGustas);
+    }
+
     public function addMeGusta(User $user){
         $this->meGustas[]= $user;
 

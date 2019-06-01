@@ -15,22 +15,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{{ asset('css/main.css') }}"/>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sticky-footer-navbar/">
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
 
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/sticky-footer-navbar.css') }}" rel="stylesheet">
 </head>
@@ -55,7 +40,7 @@
 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('fos_user_profile_show') }}">Mi Perfil</a>
+                    <a class="nav-link" href="/ejemploSIS/web/app_dev.php/miperfil">Mi Perfil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('fos_user_change_password') }}" >Cambiar Contrasenia</a>

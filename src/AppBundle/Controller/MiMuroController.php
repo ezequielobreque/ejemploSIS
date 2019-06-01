@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 class MiMuroController extends controller
 {
     /**
-     * @Route("/mimuro", name="miPerfil")
+     * @Route("/mimuro", name="miMuro")
      */
 
 
@@ -73,21 +73,19 @@ class MiMuroController extends controller
 
 
 
-    /*
+
 
     /**
-     * @Route("/mimuro", name="megusta")
+     * @Route("/mimuro", name="CMensaje")
      */
     public function CMensajeAction(Request $request) {
 
-        $mensaje = new mensaje();
-        $informacion = $request->request->get('_postear');
 
-        $mensaje->setInformacion();
+        $forms=$this->createFormBuilder($mensaje);
 
-        $user = $this->getUser()->getId();
 
-        $form = $user->addmensaje( $mensaje);
+
+
 
         /*$form = $this->createForm('', $categorium);
         $form->handleRequest($request);
@@ -102,12 +100,13 @@ class MiMuroController extends controller
                 'mensaje publicado'
             );
 
-            return $this->redirectToRoute('perfil/miperfil.html.twig');*/
+            return $this->redirectToRoute('perfil/miperfil.html.twig');
 
             //return $this->redirectToRoute('libro_show', array('id' => $libro->getId()));
-        }
+        }*/
 
 
 
 
+}
 }

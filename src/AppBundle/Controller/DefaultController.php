@@ -39,7 +39,7 @@ class DefaultController extends Controller
 
 
                 $qb->setFirstResult(0)
-                    ->setMaxResults(2);
+                    ->setMaxResults(10);
         $query = $qb->getQuery();
 
         $mensajes=$query->getResult();

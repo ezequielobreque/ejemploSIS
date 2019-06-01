@@ -45,7 +45,7 @@ THE SOFTWARE.
 html, body { height: 100%; }
 
 body {
-  background-color: #FFF;
+
   font-size: 130%;
   font-family: calluna, Calluna, Georgia;
   font-weight: 300;
@@ -53,6 +53,9 @@ body {
   text-rendering: optimizeLegibility;
   color: #555;
   padding-top: 60px;
+  background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 h1, h2, h3, h4, h5, h6 {
