@@ -38,9 +38,9 @@ class MiMuroController extends controller
             ->select('seg.id')
             ->from('AppBundle:User', 'u')
             ->join('u.losQueSigo', 'seg')
-            ->where('u.id = ?1')
+            ->where('u.id = :id')
             ->getQuery()
-            ->setParameter(1, $this->getUser()->getId())
+            ->setParameter("id", $this->getUser()->getId())
             ->execute();
 
         $qb = $entityManager->createQueryBuilder()

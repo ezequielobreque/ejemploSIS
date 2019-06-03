@@ -23,36 +23,7 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
     }
-    /**
-     * @Route("/perfil/{id}", name="userPerfil")
-     */
-    public function getPerfil(string $id)
-    {
-        $em= $this->getDoctrine()->getManager();
-        $qb= $em->createQueryBuilder();
-        $qb->select('m')
-            ->from('AppBundle:Mensaje', 'm')
-            ->join('m.user', 'u')
-            ->where('u.username = :username')
-            ->orderBy('m.fechaHora', 'DESC')
-            ->setParameter('username', $id);
 
-
-                $qb->setFirstResult(0)
-                    ->setMaxResults(10);
-        $query = $qb->getQuery();
-
-        $mensajes=$query->getResult();
-
-       // $usuario = $em->getRepository(\AppBundle\Entity\User::class)->findOneBy( ['username'=>$id]);
-       // $mensaje=$usuario->getMensajes();
-
-
-        return $this ->render('usuario/usuario.html.twig',['perfil'=>$mensajes]);
-
-
-
-    }
 
 
 

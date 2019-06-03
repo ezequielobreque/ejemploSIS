@@ -20,14 +20,26 @@
         <div class="secondCol">
             <div class="innerFlex">
 
+
+
     {% for mensaje in perfil%}
 
-                    <div class="firstItem">
-        <i>{{ mensaje.getUser().getUsername() }}</i>
-        <br>
-        <p>{{ mensaje.getInformacion() }}</p>
-                        <i>    {{ mensaje.getMegustas() }}</i>
-                    </div>
+        <div class="col-12">
+            <div class="card mb-3">
+                <div class="card-block">
+                    <h4 class="card-title"><img src="http://institutomedios.com/wp-content/uploads/2015/01/perfil_de_ana_beatriz_barros_wallpaper-35255.jpg" class="img-fluid rounded" alt="Responsive image rounded" style="width:50px;"> {{ mensaje.getUser().getUsername() }}</h4>
+                    <p class="card-text">{{ mensaje.getInformacion() }}.</p>
+                    <i class="card-text"><small class="text-muted">{{ mensaje.fechaHora | date('d/m/Y H:i') }}</small></i>
+                </div>
+                <img class="card-img-bottom" src="http://www.climbingvenezuela.com/sites/default/files/styles/bigwig_940x460/public/bigwig/ascenso_pico_naiguata_02_0.jpg?itok=mAq5kzme" alt="Card image cap">
+                <div class="card-footer text-muted center">
+                    <i class="far fa-thumbs-up"></i> Me Gusta ({{ mensaje.meGustas }})
+                </div>
+            </div>
+        </div>
+
+
+
 
 
     {% endfor %}

@@ -50,6 +50,8 @@ class Mensaje
     {
         $this->informacion = $informacion;
         $this->fechaHora= new \DateTime();
+        $m=rand(0,9);
+        $this->fechaHora->modify("+{$m} minutes");
         $this->meGustas= new ArrayCollection();
     }
     public function setUser(User $user){
