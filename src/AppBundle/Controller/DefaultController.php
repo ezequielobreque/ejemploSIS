@@ -4,6 +4,9 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Mensaje;
 use AppBundle\Entity\User;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,10 +21,37 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+
+            $form = $this->createFormBuilder()
+                ->setMethod('GET')
+                ->add('nombre', TextType::class)
+                ->add('filtrar', SubmitType::class, ['label' => 'Buscar'])
+                ->getForm();
+
+            $qb = $this->getDoctrine()->getManager()->createQueryBuilder('p');
+            $qb->select('p')
+                ->from('AppBundle:User', 'p');
+
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $criteria = $form->getData();
+
+                $qb->where( $qb->expr()->like('p.username', '?1'))
+                    ->setParameter(1, '%' . $criteria['nombre'] . '%');
+            }
+
+            $busqueda = $qb->getQuery()->getResult();
+            $busqueda=$busqueda[0];
+
+
+            return $this->render(
+                'default/index.html.twig',['base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+                'busqueda' => $busqueda, 'form' => $form->createView()]);
+
+
+
+
     }
 
 

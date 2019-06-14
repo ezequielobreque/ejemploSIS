@@ -53,6 +53,7 @@ body {
   text-rendering: optimizeLegibility;
   color: #555;
   padding-top: 60px;
+  background-image: url(http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-color: #000918;
@@ -188,7 +189,7 @@ body {
 }
 .firstCol {
   width: 23%;
-
+  padding: 6px;
   order: 1;
   border-radius: 20px 20px 20px 20px;
   -moz-border-radius: 20px 20px 20px 20px;
@@ -246,6 +247,23 @@ body {
   -moz-border-radius: 20px 20px 20px 20px;
   -webkit-border-radius: 20px 20px 20px 20px;
   border: 1px solid #130ceb;
+}
+.card{
+  border-radius: 20px 20px 20px 20px;
+  -moz-border-radius: 20px 20px 20px 20px;
+  -webkit-border-radius: 20px 20px 20px 20px;
+  margin: 5px;
+  justify-content: space-between;
+  border: 1px solid #130ceb;
+  order: 1;
+  color: black;
+  background: whitesmoke;
+}
+.card-img-bottom {
+  height: 50%;
+  width: 100%;
+  border-bottom-right-radius: calc(.25rem - 1px);
+  border-bottom-left-radius: calc(.25rem - 1px);
 }
 
 

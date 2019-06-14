@@ -13,8 +13,12 @@
         <div class="firstCol">
 
 
-            <img src="https://image.flaticon.com/icons/svg/72/72905.svg" style="max-width: 100px;max-height: 100px;border: 1px solid">
-                <p>eze</p>
+            {% if app.user.imageName==null %}
+                <img src="https://image.flaticon.com/icons/svg/72/72905.svg"  class="img-fluid rounded" alt="Responsive image rounded" style="width:100px;">
+            {% else%}
+                <img src="{{ asset('imagenes/user/' ~ app.user.imageName) }}" class="img-fluid rounded" alt="Responsive image rounded" style="width:100px;">
+            {% endif %}
+            <i>{{ app.user.username }}</i>
 
         </div>
         <div class="secondCol">
@@ -31,7 +35,7 @@
                     <p class="card-text">{{ mensaje.getInformacion() }}.</p>
                     <i class="card-text"><small class="text-muted">{{ mensaje.fechaHora | date('d/m/Y H:i') }}</small></i>
                 </div>
-                <img class="card-img-bottom" src="http://www.climbingvenezuela.com/sites/default/files/styles/bigwig_940x460/public/bigwig/ascenso_pico_naiguata_02_0.jpg?itok=mAq5kzme" alt="Card image cap">
+                <img class="card-img-bottom" src="{{ asset('imagenes/mensaje/' ~ mensaje.imageName) }}" alt="Card image cap">
                 <div class="card-footer text-muted center">
                     <i class="far fa-thumbs-up"></i> Me Gusta ({{ mensaje.meGustas }})
                 </div>

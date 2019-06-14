@@ -13,6 +13,9 @@ use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Doctrine\ORM;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,4 +56,55 @@ class MiPerfilController extends controller
 
 
     }
+    /**
+     * @Route("/{nombre}/editar", name="editar_perfil")
+     */
+    public function editarMiPerfil(Request $request,String $nombre){
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+
+
+
+
+
+        $qb= $entityManager->createQueryBuilder();
+        $qb->select('m')
+            ->from('AppBundle:User', 'm')
+            ->where('m.username = :username')
+            ->setParameter('username', $nombre);
+
+
+
+        $query = $qb->getQuery();
+        $user=$query->getResult();
+        $user=$user[0];
+
+        $edit = $this->createFormBuilder($user)
+
+            ->add('username', TextType::class)
+            ->add('email', TextType::class)
+            ->add('imageFile', VichImageType::class,['required' => false,
+                'allow_delete' => true,
+            ])
+            ->add('save', SubmitType::class, ['label' => 'editar perfil'])
+            ->getForm();
+
+        $edit->handleRequest($request);
+
+        if ($edit->isSubmitted() && $edit->isValid()) {
+
+
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('miPerfil');
+        }
+        return $this->render('perfil/perfil_editar.html.twig', ['user'=>$user,
+            'edit' => $edit->createView()
+        ]);
+
+
+    }
+
 }

@@ -12,11 +12,17 @@
         <div class="flexContainer">
             <div class="firstCol">
 
-
-                <img src="https://image.flaticon.com/icons/svg/72/72905.svg" style="max-width: 100px;max-height: 100px;border: 1px solid">
-                <i>eze</i>
+                {% if app.user.imageName==null %}
+                    <img src="https://image.flaticon.com/icons/svg/72/72905.svg"  class="img-fluid rounded" alt="Responsive image rounded" style="width:100px;">
+                {% else%}
+                    <img src="{{ asset('imagenes/user/' ~ app.user.imageName) }}" class="img-fluid rounded" alt="Responsive image rounded" style="width:100px;">
+                {% endif %}
+                <i>{{ app.user.username }}</i>
                 <br>
                 <i>Email :{{ app.user.email }}</i>
+                <br>
+                <a href= "{{ path('editar_perfil', {'nombre': app.user.username }) }}" class="text-muted" methods="GET">  editar  </a>
+
 
             </div>
             <div class="secondCol">
@@ -24,12 +30,28 @@
 
                     {% for mensaje in perfil%}
 
-                    <div class="firstItem">
-                        <i>{{ app.user.username }}</i>
-                        <br>
-                        <p>{{ mensaje.getInformacion() }}</p>
-                    </div>
 
+
+
+                        <div class="col-12">
+                            <div class="card mb-3">
+                                <div class="card-block">
+                                    <h4 class="card-title"><img src="http://institutomedios.com/wp-content/uploads/2015/01/perfil_de_ana_beatriz_barros_wallpaper-35255.jpg" class="img-fluid rounded" alt="Responsive image rounded" style="width:50px;"> {{ app.user.username }}</h4>
+                                    <p class="card-text">{{ mensaje.getInformacion() }}.</p>
+                                    <i class="card-text"><small class="text-muted">{{ mensaje.fechaHora | date('d/m/Y H:i') }}   </small></i>
+                                    <br>
+                                    <a href= "{{ path('editar_mensaje', {'id': mensaje.id }) }}" class="text-muted">  editar  </a>
+                                    <a href= "{{ path('eliminar_mensaje', {'id': mensaje.id }) }}" class="text-muted">  eliminar  </a>
+                                </div>
+                                {% if mensaje.imageName==null %}
+                                {% else%}
+                                    <img class="card-img-bottom" src="{{ asset('imagenes/mensaje/' ~ mensaje.imageName) }}" alt="Card image cap">
+                                {% endif %}
+                                <div class="card-footer text-muted center">
+                                    <i class="far fa-thumbs-up"></i> Me Gusta ({{ mensaje.meGustas }})
+                                </div>
+                            </div>
+                        </div>
 
                     {% endfor %}
                 </div>
