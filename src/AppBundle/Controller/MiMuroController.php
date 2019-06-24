@@ -35,9 +35,45 @@ class MiMuroController extends controller
 
 
 
+        $entityManager = $this->getDoctrine()->getManager();
+
+
+        $resultados=null;
+        $qb = $this->getDoctrine()->getManager()->createQueryBuilder('p');
+        $qb->select('p')
+
+            ->from('AppBundle:Mensaje', 'p');
+
+        $busqueda = $request->get('megusta');
+
+        if ($busqueda) {
+            $qb->where('p.id= :id')
+                ->setParameter('id',$busqueda);
+            $resultados = $qb->getQuery()->getResult();
+
+            if(in_array($this->getUser(),$resultados[0]->getMegusta()->toArray())){
+
+                $resultados[0]->sacarMeGusta($this->getUser());
+                $entityManager->flush();
+            }
+
+            else{
+
+                $resultados[0]->addMeGusta($this->getUser());
+                $entityManager->flush();
+            }
+
+
+        }
+
+
+
+
+
+
         // $em= $this->getDoctrine()->getManager();
         //$usuario = $em->createQuery("SELECT u FROM AppBundle\Entity\User u  WHERE u.seguidos ='Ezequiel'");
-        $entityManager = $this->getDoctrine()->getManager();
+
         $user=$this->getUser();
         $mensaje= new Mensaje("");
         $mensaje->setUser($user);
@@ -48,7 +84,7 @@ class MiMuroController extends controller
              ->add('imageFile', VichImageType::class,['required' => false,
                  'allow_delete' => true,
                     ])
-            ->add('save', SubmitType::class, ['label' => 'postear'])
+            ->add('save', SubmitType::class, ['label' => 'postear','attr'=>['type'=>'button','class'=>'btn btn-outline-primary btn-sm float-right']])
             ->getForm();
 
         $form->handleRequest($request);
@@ -93,10 +129,25 @@ class MiMuroController extends controller
 
         // }
 
+        $qb= $entityManager->createQueryBuilder();
+        $qb->select('m')
+            ->from('AppBundle:User', 'm');
 
 
 
-        return $this ->render('perfil/mimuro.html.twig',['perfil'=>$user,'form' => $form->createView()]);
+        $qb->setFirstResult(0)
+            ->setMaxResults(10);
+
+
+        $query = $qb->getQuery();
+        $usuarios=$query->getResult();
+        $noamigos=array_diff($usuarios,array($this->getUser()),$this->getUser()->getLosQueSigo()->toArray());
+
+
+
+
+
+        return $this ->render('perfil/mimuro.html.twig',['perfil'=>$user,'form' => $form->createView(),'noamigos'=>$noamigos]);
 
 
 
@@ -186,5 +237,15 @@ class MiMuroController extends controller
         ]);
 
     }
+    /**
+     * @Route("/megusta/{id}/elim", name="eliminar_mensaje")
+     *
+     */
+    public function megustaMensajeAction(Request $request,int $id)
+    {
+
+
+    }
+
 
 }

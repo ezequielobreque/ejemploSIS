@@ -152,13 +152,11 @@ class Mensaje
      */
     public function getMeGusta()
     {
-        return $this->meGusta;
+        return $this->meGustas;
     }
 
     public function getMeGustas()
     {
-
-
 
 
         return sizeof($this->meGustas);
@@ -167,6 +165,9 @@ class Mensaje
     public function addMeGusta(User $user){
         $this->meGustas[]= $user;
 
+    }
+    public function sacarMeGusta(User $user){
+        $this->meGustas=array_diff($this->meGustas->toArray(),array($user));
     }
 
     /**

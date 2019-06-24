@@ -51,7 +51,22 @@ class MiPerfilController extends controller
         // $usuario = $em->getRepository(\AppBundle\Entity\User::class)->findOneBy( ['username'=>$id]);
         // $mensaje=$usuario->getMensajes();
 
-        return $this ->render('perfil/miperfil.html.twig',['perfil'=>$mensajes]);
+
+        $qb= $entityManager->createQueryBuilder();
+        $qb->select('m')
+            ->from('AppBundle:User', 'm');
+
+
+
+        $qb->setFirstResult(0)
+            ->setMaxResults(10);
+
+
+        $query = $qb->getQuery();
+        $usuarios=$query->getResult();
+        $noamigos=array_diff($usuarios,array($this->getUser()),$this->getUser()->getLosQueSigo()->toArray());
+
+        return $this ->render('perfil/miperfil.html.twig',['perfil'=>$mensajes,'noamigos'=>$noamigos]);
 
 
 

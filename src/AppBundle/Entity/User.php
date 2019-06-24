@@ -132,6 +132,23 @@ class User extends BaseUser
         return $this->imageFile;
     }
 
+    /**
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+
     public function setImageName(?string $imageName): void
     {
         $this->imageName = $imageName;
@@ -161,9 +178,30 @@ class User extends BaseUser
 
     }
     public function addSeguir(User $usuario){
-        $this->LosQueSigo[] = $usuario;
+        $this->losQueSigo[] = $usuario;
         $usuario->setSeguidor($this);
         return $this;
+
+
+    }
+    public function sacarMeGusta(User $user){
+        $this->meGustas=array_diff($this->meGustas->toArray(),array($user));
+    }
+
+    public function dejarSeguir(User $user){
+        $this->losQueSigo=array_diff($this->losQueSigo->toArray(),array($user));
+        $user->misSeguidores=array_diff($user->misSeguidores->toArray(),array($this));
+
+    }
+    public function LoSigo(User $usuario){
+        if(in_array($this,$usuario->getMisSeguidores()->toArray())){
+            return true;
+
+        }else{
+
+            return false;
+        }
+
 
 
     }

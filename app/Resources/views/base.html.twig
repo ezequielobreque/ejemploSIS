@@ -81,28 +81,54 @@
 
 
 </div>
-</nav>
+        </div>
+    </nav>
 </header>
 {% for i in app.User  %}
 
 <li>{{ i.getId() }}</li>
 {% endfor %}
 
+{% if app.user %}
+{% else %}
+    {% if app.request.attributes.get('_route')== "homepage" %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm" style="margin-top: 5em; text-align:center;">
+
+                <h1 style="color:white;margin:auto;font-size: 200%;font-family: Catamaran,Helvetica,Arial,sans-serif;">Si ya tiene una cuenta puede iniciar sesion</h1>
+                <form>
+                <input type="button" class="btn btn-outline-primary" value="iniciar sesion"onclick=" window.location.href='{{ path('fos_user_security_login') }}'" style="font-size: 150%">
+                </form>
+            </div>
+            <div class="col-sm" style="margin-top: 5em; text-align:center;">
+
+                <h1 style="color:white;margin:auto;font-size: 200%;font-family: Catamaran,Helvetica,Arial,sans-serif;">¿no tiene una cuenta? registrese ahora</h1>
 
 
+                <form>
+                    <input type="button" class="btn btn-outline-primary" value="registrarse" onclick="window.location.href='{{ path('fos_user_registration_register') }}'" style="font-size: 150%" />
+                </form>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endif %}
 
+{% block body %}
 
-{% block body %}{% endblock %}
+{% endblock %}
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 {% block javascripts %}{% endblock %}
-
 <footer class="footer mt-auto py-3">
-<div class="container">
-<span class="text-muted">Taller de nuevas tecnologias : Sistemas 2019</span>
-</div>
+    <div class="container">
+        <span class="text-muted">Taller de nuevas tecnologias : Sistemas 2019</span>
+    </div>
 </footer>
+
 
 </body>
 </html>
