@@ -30,6 +30,8 @@ framework:
     assets: ~
     php_errors:
         log: true
+    templating:
+        engines: ['twig']
 
 # Twig Configuration
 twig:
@@ -92,5 +94,66 @@ vich_uploader:
             uri_prefix: /imagenes/mensaje
             upload_destination: '%kernel.project_dir%/web/imagenes/mensaje'
 
-twig:
-    form_themes: ['bootstrap_4_layout.html.twig']
+fos_rest:
+    routing_loader:
+        default_format: json                            # All responses should be JSON formated
+        include_format: false                           # We do not include format in request, so that all responses
+        # will eventually be JSON formated
+    format_listener:
+        rules:
+            - { priorities: ['json'], fallback_format: json, prefer_extension: false }
+    view:
+
+        view_response_listener: true
+
+    zone:
+        - {path: ^/api/*}
+
+
+jms_serializer:
+    metadata:
+        auto_detection: true
+        directories:
+            api:
+                namespace_prefix: "AppBundle"
+                path: "@AppBundle/Resources/config/serializer"
+            FOSUB:
+                namespace_prefix: "FOS\\UserBundle"
+                path: "%kernel.project_dir%/app/serializer/FOSUB"
+
+nelmio_cors:
+    defaults:
+        allow_credentials: false
+        allow_origin: []
+        allow_headers: []
+        allow_methods: []
+        expose_headers: []
+        max_age: 0
+        hosts: []
+        origin_regex: false
+        forced_allow_origin_value: ~
+    paths:
+        '^/api*':
+            allow_origin: ['*']
+            allow_headers: ['*']
+            allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
+            max_age: 3600
+
+        '^/oauth/v2/token*':
+            allow_origin: ['*']
+            allow_headers: ['*']
+            allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
+            max_age: 3600
+
+fos_oauth_server:
+    db_driver:           orm
+    client_class:        AppBundle\Entity\Client
+    access_token_class:  AppBundle\Entity\AccessToken
+    refresh_token_class: AppBundle\Entity\RefreshToken
+    auth_code_class:     AppBundle\Entity\AuthCode
+    service:
+        user_provider: fos_user.user_provider.username
+        options:
+            # Changing tokens and authcode lifetime
+            access_token_lifetime: 1209600 # 1 año
+            refresh_token_lifetime: 2419200 # 2 años

@@ -37,3 +37,9 @@ services:
         resource: '../../src/AppBundle/DataFixtures'
         tags: ['doctrine.fixture.orm']
 
+
+    get_set_method_normalizer:
+        public: false
+        class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
+        # Important! Tag this service or it wouldn't work
+        tags: [serializer.normalizer]

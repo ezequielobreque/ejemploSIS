@@ -65,8 +65,8 @@ class MiPerfilController extends controller
         $query = $qb->getQuery();
         $usuarios=$query->getResult();
         $noamigos=array_diff($usuarios,array($this->getUser()),$this->getUser()->getLosQueSigo()->toArray());
-
-        return $this ->render('perfil/miperfil.html.twig',['perfil'=>$mensajes,'noamigos'=>$noamigos]);
+        $noami=array_slice($noamigos, 0, 3);
+        return $this ->render('perfil/miperfil.html.twig',['perfil'=>$mensajes,'noamigos'=>$noami]);
 
 
 

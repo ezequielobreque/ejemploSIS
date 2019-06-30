@@ -17,6 +17,7 @@ use Doctrine\ORM;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
+use Symfony\Component\Security\Core\Encoder\PlaintextPasswordEncoder;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class contraseniaController extends controller
@@ -25,41 +26,29 @@ class contraseniaController extends controller
     /**
      * @Route("/cambiar_contrasenia", name="CambiarC")
      */
-    public function cambiarContraseniaAction(UserPasswordEncoderInterface $encoder,Request $request)
+    public function cambiarContraseniaAction(Request $request)
     {
 
+        $user = $this->getUser();
+        $newPasswordPlain = 'newpassword';
+        $currentPasswordForValidation = 'test';
 
-        $entityManager = $this->getDoctrine()->getManager();
+        $encoder_service = $this->get('security.encoder_factory');
+        $encoder = $encoder_service->getEncoder($user);
+        $encodedPassword = $encoder->isPasswordValid($user->getPassword(),$currentPasswordForValidation,$user->getSalt());
 
+        var_dump( $encodedPassword);
+        var_dump( $user->getPassword());
 
-        $contra= $request->get('contra');
-
-        $encoded = $encoder->encodePassword($this->getUser(), $contra);
-        if($this->getUser()->getPassword()==$encoded){
-
-            $var='hola';
-
-
-      }else{
-            $var=$encoded;
+        if ( $user->getPassword() == $encodedPassword ) {
+            $userManager = $this->container->get('fos_user.user_manager');
+            $user->setPlainPassword($newPasswordPlain);
+            $userManager->updateUser($user, true);
+        } else {
+            var_dump('error: not the same password'); exit;
         }
-        /*$edit = $this->createFormBuilder($user)
 
-            ->add('plainPassword', PasswordType::class,[])
-            ->add('save', SubmitType::class, ['label' => 'editar contrasenia'])
-            ->getForm();
-
-        $edit->handleRequest($request);
-
-        if ($edit->isSubmitted() && $edit->isValid()) {
-
-
-
-            $entityManager->flush();
-
-            return $this->redirectToRoute('miPerfil');
-        }*/
-        return $this->render('contraseña/cambiar_contraseña.html.twig', ['var'=>$var]);
+        return $this->render('contraseña/cambiar_contraseña.html.twig', ['form'=>$form]);
 
     }
 }

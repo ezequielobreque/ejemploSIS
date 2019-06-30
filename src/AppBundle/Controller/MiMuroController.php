@@ -144,10 +144,10 @@ class MiMuroController extends controller
         $noamigos=array_diff($usuarios,array($this->getUser()),$this->getUser()->getLosQueSigo()->toArray());
 
 
+        $noami=array_slice($noamigos, 0, 3);
 
 
-
-        return $this ->render('perfil/mimuro.html.twig',['perfil'=>$user,'form' => $form->createView(),'noamigos'=>$noamigos]);
+        return $this ->render('perfil/mimuro.html.twig',['perfil'=>$user,'form' => $form->createView(),'noamigos'=>$noami]);
 
 
 

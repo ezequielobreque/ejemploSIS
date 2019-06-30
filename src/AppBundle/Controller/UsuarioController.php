@@ -34,7 +34,6 @@ class UsuarioController extends controller
         $resultados=null;
         $qb = $this->getDoctrine()->getManager()->createQueryBuilder('p');
         $qb->select('p')
-
             ->from('AppBundle:Mensaje', 'p');
 
         $busqueda = $request->get('megusta');
@@ -135,9 +134,10 @@ class UsuarioController extends controller
         $query = $qb->getQuery();
         $usuarios=$query->getResult();
         $noamigos=array_diff($usuarios,array($this->getUser()),$this->getUser()->getLosQueSigo()->toArray());
+        $noami=array_slice($noamigos, 0, 3);
 
 
-        return $this ->render('usuario/usuario.html.twig',['msg'=>$mensajes,'user'=>$user,'noamigos'=>$noamigos]);
+        return $this ->render('usuario/usuario.html.twig',['msg'=>$mensajes,'user'=>$user,'noamigos'=>$noami]);
 
 
 
