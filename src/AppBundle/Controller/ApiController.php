@@ -49,12 +49,14 @@ class ApiController extends FOSRestController
 
         $user = $this->get('security.token_storage')->getToken()->getUser();*/
 
+
         $entityManager = $this->getDoctrine()->getManager();
 
 
         $qb= $entityManager->createQueryBuilder();
         $qb->select('m')
-            ->from('AppBundle:Mensaje', 'm');
+            ->from('AppBundle:Mensaje', 'm')
+        ->orderBy('m.fechaHora', 'DESC');
 
         $query = $qb->getQuery();
 
@@ -78,13 +80,19 @@ class ApiController extends FOSRestController
      */
     public function MensajeUserAction(String $user)
     {
+
+
+
+
         $entityManager = $this->getDoctrine()->getManager();
 
 
         $qb= $entityManager->createQueryBuilder();
-        $qb->select('u')
-            ->from('AppBundle:User', 'u')
-            ->where('u.username= :user')
+        $qb->select('m')
+            ->from('AppBundle:Mensaje', 'm')
+            ->join('m.user', 'u')
+            ->where('u.username = :user')
+            ->orderBy('m.fechaHora', 'DESC')
             ->setParameter('user', $user);
 
         $query = $qb->getQuery();
@@ -92,7 +100,7 @@ class ApiController extends FOSRestController
         $result =$query->getResult();
 
 
-        $view = $this->view($result[0]->getMensajes());
+        $view = $this->view($result);
 
         $view->getContext()->setGroups(['default','list']);
 
@@ -100,6 +108,35 @@ class ApiController extends FOSRestController
 
         return $this->handleView($view);
 
+    }
+
+    /**
+     * @Route("/api/busquedas/usuarios", name="busquedas_api_usuarios")
+     */
+    public function buscarUsuariosAction(Request $request)
+    {
+        $resultados = null;
+        $qb = $this->getDoctrine()->getManager()->createQueryBuilder('p');
+        $qb->select('p')
+            ->from('AppBundle:User', 'p');
+
+        $busqueda = $request->get('busqueda');
+
+        if ($busqueda) {
+            $qb->where($qb->expr()->like('p.username', '?1'))
+                ->setParameter(1, '%' . $busqueda . '%');
+            $resultados = $qb->getQuery()->getResult();
+
+
+        }
+
+        $view = $this->view($resultados);
+
+        $view->getContext()->setGroups(['default','list']);
+
+        // $view->setSerializerGruops(array('list'));
+
+        return $this->handleView($view);
     }
 
 

@@ -177,6 +177,9 @@ class MiMuroController extends controller
         $mensaje=$mensa[0];
         $edit = $this->createFormBuilder($mensaje)
             ->add('informacion', TextType::class)
+            ->add('imageFile', VichImageType::class,['required' => false,
+                'allow_delete' => true,
+            ])
             ->add('save', SubmitType::class, ['label' => 'editar mensaje'])
             ->getForm();
 
@@ -235,15 +238,6 @@ class MiMuroController extends controller
         return $this->render('perfil/mensaje_borrar.html.twig', ['mensaje'=>$mensaje,
             'edit' => $edit->createView()
         ]);
-
-    }
-    /**
-     * @Route("/megusta/{id}/elim", name="eliminar_mensaje")
-     *
-     */
-    public function megustaMensajeAction(Request $request,int $id)
-    {
-
 
     }
 

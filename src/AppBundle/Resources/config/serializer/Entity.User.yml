@@ -7,3 +7,6 @@ AppBundle\Entity\User:
         id:
             expose: true
             groups: ['list']
+        imageName:
+            expose: true
+            groups: ['list']

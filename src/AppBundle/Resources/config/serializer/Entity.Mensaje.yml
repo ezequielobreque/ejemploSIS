@@ -10,3 +10,6 @@ AppBundle\Entity\Mensaje:
         user:
             expose: true
             groups: ['list']
+        imageName:
+            expose: true
+            groups: ['list']

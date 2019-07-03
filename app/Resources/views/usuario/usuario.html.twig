@@ -56,9 +56,22 @@
                 {% else%}
                     <img class="card-img-bottom" src="{{ asset('imagenes/mensaje/' ~ mensaje.imageName) }}" alt="Card image cap">
                 {% endif %}
-                <div class="card-footer text-muted center">
-                    <i class="far fa-thumbs-up"></i> Me Gusta ({{ mensaje.meGustas }})
-                </div>
+                <form class="card-footer text-muted center" method="POST" action="{{ path('miMuro') }}">
+                    <input class="form-control mr-sm-   2" type="hidden" placeholder="buscar" aria-label="Search" name="megusta" value="{{ mensaje.getId() }}" >
+
+
+
+                    {% if app.user.MegustaMensaje(mensaje)==false %}
+
+                        <button class="far fa-thumbs-up" type="submit" style="border: 2px solid lightgray; ">me gusta </button>({{ mensaje.meGustas }})
+
+                    {%else  %}
+
+                        <button class="fas fa-thumbs-up" type="submit" style="border: 2px solid deepskyblue;">me gusta </button>({{ mensaje.meGustas }})
+
+                    {% endif %}
+
+                </form>
             </div>
         </div>
 

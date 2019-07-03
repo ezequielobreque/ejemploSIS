@@ -232,6 +232,20 @@ class User extends BaseUser
 
 
     }
+
+    public function MegustaMensaje(Mensaje $mensaje){
+        if(in_array($this,$mensaje->getMeGusta()->toArray())){
+            return true;
+
+        }else{
+
+            return false;
+        }
+
+
+
+    }
+
     public function setSeguidor(User $usuario){
         $this->misSeguidores[]= $usuario;
 

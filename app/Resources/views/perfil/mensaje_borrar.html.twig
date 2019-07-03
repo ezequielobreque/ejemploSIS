@@ -7,9 +7,12 @@
         <div class="flexContainer">
             <div class="firstCol">
 
-
-                <img src="https://image.flaticon.com/icons/svg/72/72905.svg" style="max-width: 100px;max-height: 100px;border: 1px solid">
-                <p>eze</p>
+                {% if app.user.imageName==null %}
+                    <img src="https://image.flaticon.com/icons/svg/72/72905.svg"  class="img-fluid rounded" alt="Responsive image rounded" style="width:100px;">
+                {% else%}
+                    <img src="{{ asset('imagenes/user/' ~ app.user.imageName) }}" class="img-fluid rounded" alt="Responsive image rounded" style="width:100px;">
+                {% endif %}
+                <i>{{ app.user.username }}</i>
 
             </div>
             <div class="secondCol">
@@ -18,7 +21,13 @@
                         <div class="card mb-3">
                             {{ form_start(edit) }}
                             {{ form_errors(edit) }}
-                            <h4 class="card-title"><img src="http://institutomedios.com/wp-content/uploads/2015/01/perfil_de_ana_beatriz_barros_wallpaper-35255.jpg" class="img-fluid rounded" alt="Responsive image rounded" style="width:50px;"> {{ mensaje.getUser().getUsername() }}</h4>
+                            <h4 class="card-title">
+                                {% if app.user.imageName==null %}
+                                    <img src="https://image.flaticon.com/icons/svg/72/72905.svg"  class="img-fluid rounded" alt="Responsive image rounded" style="width:100px;">
+                                {% else%}
+                                    <img src="{{ asset('imagenes/user/' ~ app.user.imageName) }}" class="img-fluid rounded" alt="Responsive image rounded" style="height: 50px; width:75px;">
+                                {%endif%}
+                                {{ mensaje.getUser().getUsername() }}</h4>
                             <p class="card-text">{{ mensaje.getInformacion() }}.</p>
                             <i class="card-text"><small class="text-muted">{{ mensaje.fechaHora | date('d/m/Y H:i') }}</small></i>
 

@@ -19,13 +19,17 @@
     <link href="{{ asset('css/sticky-footer-navbar.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css">
+
+    {% block head_css %}
+        <!-- Copy CSS from https://getbootstrap.com/docs/4.1/getting-started/introduction/#css -->
+    {% endblock %}
 </head>
 <body class="d-flex flex-column h-100">
 <header>
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         {% if app.user %}
-            <a class="navbar-brand" href="/ejemploSIS/web/app_dev.php/mimuro">Home</a>
+            <a class="navbar-brand" href="{{path('miMuro')}}">Inicio</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -37,14 +41,14 @@
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('fos_user_security_logout')}}">LogOut <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ path('fos_user_security_logout')}}">Cerrar sesión </a>
 
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="/ejemploSIS/web/app_dev.php/miperfil">Mi Perfil</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('fos_user_change_password') }}" >Cambiar Contrasenia</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('fos_user_change_password') }}" >Cambiar Contraseña</a>
                 </li>
             </ul>
 
@@ -59,14 +63,14 @@
 
             <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ path('fos_user_registration_register') }}">registrarse <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ path('fos_user_registration_register') }}">Registrarse </a>
 
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('fos_user_security_login')}}">Iniciar sesion</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('fos_user_security_login')}}">Iniciar sesión</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="{{ path('fos_user_resetting_request')}}" tabindex="-1" aria-disabled="true">Recuperar contrasenia</a>
+                    <li class="nav-item active">
+                        <a class="nav-link " href="{{ path('fos_user_resetting_request')}}"  >Recuperar contraseña</a>
                     </li>
                 </ul>
             {% endif %}
@@ -123,6 +127,9 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 {% block javascripts %}{% endblock %}
+{% block head_js %}
+    <!-- Copy JavaScript from https://getbootstrap.com/docs/4.1/getting-started/introduction/#js -->
+{% endblock %}
 <footer class="footer mt-auto py-3">
     <div class="container">
         <span class="text-muted">Taller de nuevas tecnologias : Sistemas 2019</span>

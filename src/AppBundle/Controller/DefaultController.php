@@ -21,7 +21,16 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        if ($this->getUser()==null){
 
+            return $this->render('default/index.html.twig');
+
+
+        }else{
+
+
+        return $this->redirectToRoute('miMuro');
+    }/*
             $form = $this->createFormBuilder()
                 ->setMethod('GET')
                 ->add('nombre', TextType::class)
@@ -50,7 +59,7 @@ class DefaultController extends Controller
                 'busqueda' => $busqueda, 'form' => $form->createView()]);
 
 
-
+*/
 
     }
 

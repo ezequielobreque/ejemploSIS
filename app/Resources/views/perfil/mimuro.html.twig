@@ -14,6 +14,28 @@
                     <img src="{{ asset('imagenes/user/' ~ app.user.imageName) }}" class="img-fluid rounded" alt="Responsive image rounded" style="width:100px;">
                 {% endif %}
                 <i>{{ app.user.username }}</i>
+                <br>
+
+                <br>
+
+                <i style="text-align: center;color: white">Usuarios que sigues</i>
+                <div class="innerFlex" style="display:flex" >
+                    {% for noami in app.user.losQueSigo|slice(0, 2) %}
+
+                        <div class="ca mb-3">
+                            {% if noami.imageName==null %}
+                                <img src="https://image.flaticon.com/icons/svg/72/72905.svg"  class="img-fluid rounded" alt="Responsive image rounded" style="width:50px;height: 50px;">
+                            {% else%}
+                                <img src="{{ asset('imagenes/user/' ~ noami.imageName) }}" class="img-fluid rounded" alt="Responsive image rounded" style="width:75px;height: 60px;">
+                            {% endif %}
+                            <a href="/ejemploSIS/web/app_dev.php/perfil/{{ noami.username }}">{{ noami.username }}</a>
+                            <br>
+
+                        </div>
+
+                    {% endfor %}
+                </div>
+                <a href="#" style="text-align: center;color: white">Mas usuarios</a>
 
             </div>
             <div class="secondCol">
@@ -47,13 +69,10 @@
                                     {#<textarea class="form-control border-0 sinborde" id="exampleTextarea" rows="3" placeholder="Deja tu Estado" style="resize: none;"></textarea>#}
                                 </div>
 
-                                <div class="tab-pane" id="messages" role="tabpanel" aria-expanded="false">
-                                    <textarea class="form-control border-0 sinborde2" id="exampleTextarea" rows="3" placeholder="Comentar Foto" style="resize: none;"></textarea>
-                                    <div class="form-group">
+                                <div class="tab-pane" id="messages" role="tabpanel" aria-expanded="false"> <div class="form-group">
                                         {{ form_widget(form.imageFile,{'attr':{'type':"file" ,'class':'form-control-file','id':'exampleInputFile' ,'aria-describedby':'fileHelp'}}) }}
 
-                                        <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
-                                    </div>
+                                     </div>
                                 </div>
 
                             </div>
@@ -105,7 +124,19 @@
 
                                     <form class="card-footer text-muted center" method="POST" action="{{ path('miMuro') }}">
                                         <input class="form-control mr-sm-   2" type="hidden" placeholder="buscar" aria-label="Search" name="megusta" value="{{ mensaje.getId() }}" >
-                                        <button class="far fa-thumbs-up" type="submit">me gusta </button>({{ mensaje.meGustas }})
+
+
+
+                                        {% if app.user.MegustaMensaje(mensaje)==false %}
+
+                                            <button class="far fa-thumbs-up" type="submit" style="border: 2px solid lightgray; ">me gusta </button>({{ mensaje.meGustas }})
+
+                                        {%else  %}
+
+                                            <button class="fas fa-thumbs-up" type="submit" style="border: 2px solid deepskyblue;">me gusta </button>({{ mensaje.meGustas }})
+
+                                        {% endif %}
+
                                     </form>
 
 
